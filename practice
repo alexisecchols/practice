@@ -1,0 +1,86 @@
+def get_dates_Worked():
+ from_date = input("Please enter start date in the following format
+MM/DD/YYY:")
+ end_date = input("Please enter end date in the following format
+MM/DD/YYYY:")
+ return from_date, end_date
+def get_emp_Name():
+ emp_Name = input("Enter employee name:")
+ return emp_Name
+def get_hours_Worked():
+ hours_Worked = float(input("Enter hours worker:"))
+ return hours_Worked
+def get_hourly_Rate():
+ hourly_Rate = float(input("Enter hourly rate:"))
+ return hourly_Rate
+def get_tax_Rate():
+ tax_Rate = float(input("Enter tax rate:"))
+ tax_Rate = tax_Rate / 100
+ return tax_Rate
+def Calc_Tax_and_net_Pay(hours_Worked, hourly_Rate, tax_Rate):
+ gross_pay = hours_Worked * hourly_Rate
+ income_Tax = gross_pay * tax_Rate
+ net_Pay = gross_pay - income_Tax
+ return gross_pay, income_Tax, net_Pay
+def print_info(emp_detail_list):
+ total_employees = 0
+ total_hours_Worked = 0.00
+ total_gross_Pay = 0.00
+ total_tax_Rate = 0.00
+ total_net_Pay = 0.00
+ for emp_list in emp_detail_list:
+ from_date = emp_list[0]
+ end_date = emp_list[1]
+ emp_Name = emp_list[2]
+ hours_Worked = emp_list[3]
+ hourly_Rate = emp_list[4]
+ tax_Rate = emp_list[5]
+ gross_Pay, income_tax_Rate, net_Pay = Calc_Tax_and_net_Pay(hours_Worked,
+hourly_Rate, tax_Rate)
+ print(from_date, end_date, emp_Name, f"{hours_Worked:,.2f}",
+f"{hourly_Rate:,.2f}", f"{gross_Pay:,.2f}", f"{tax_Rate:,.1%}",
+f"{income_tax_Rate:,.2f}", f"{net_Pay:,.2f}")
+ total_employees += 1
+This study source was downloaded by 100000892450563 from CourseHero.com on 11-17-2024 17:59:27 GMT -06:00
+https://www.coursehero.com/file/243165473/CIS261-Week5-Course-Project-Phase-2-Using-Lists-and-Dictionaries-to-Store-and-Retrieve-Datadocx/
+Crystal Kushniruk
+CIS261
+Week5 Course Project Phase 2: Using Lists and Dictionaries to Store and Retrieve
+Data
+ total_hours_Worked += hours_Worked
+ total_gross_Pay += gross_Pay
+ total_tax_Rate += income_tax_Rate
+ total_net_Pay += net_Pay
+ emp_Totals["total_Emp"] = total_employees
+ emp_Totals["total_hours_Worked"] = total_hours_Worked
+ emp_Totals["total_gross_Pay"] = total_gross_Pay
+ emp_Totals["total_tax_Rate"] = total_tax_Rate
+ emp_Totals["total_net_Pay"] = total_net_Pay
+def print_Totals(emp_Totals):
+ print(f'Total number of employees: {emp_Totals["total_Emp"]}')
+ print(f'Total hours of employees: {emp_Totals["total_hours_Worked"]}')
+ print(f'Total gross pay of employees: {emp_Totals["total_gross_Pay"]}')
+ print(f'Total tax of employees: {emp_Totals["total_tax_Rate"]}')
+ print(f'Total net pay of employees: {emp_Totals["total_net_Pay"]}')
+if __name__ == "__main__":
+ emp_Detail_list = []
+ emp_Totals = {}
+ while True:
+ emp_Name = get_emp_Name()
+ if (emp_Name.lower() == "end"):
+ break
+ from_Date, end_Date = get_dates_Worked()
+ hours_Worked = get_hours_Worked()
+ hourly_Rate = get_hourly_Rate()
+ tax_Rate = get_tax_Rate()
+ emp_Detail = []
+ emp_Detail.insert(0,from_Date)
+ emp_Detail.insert(1,end_Date)
+ emp_Detail.insert(2,emp_Name)
+ emp_Detail.insert(3,hours_Worked)
+ emp_Detail.insert(4,hourly_Rate)
+ emp_Detail.insert(5,tax_Rate)
+ emp_Detail_list.append(emp_Detail)
+
+ print_info(emp_Detail_list)
+ print_Totals(emp_Totals)
